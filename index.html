@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automind Labs | Automate Smarter. Grow Faster.</title>
+    <meta name="description" content="Automind Labs is a premium AI Automation Agency helping businesses save time, reduce costs, and increase revenue through AI agents and custom solutions.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kaushalborse38-maker/Automind-Labs-Web/main/4.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#292929',
+                            lime: '#c1ff72',
+                            purple: '#8c52ff',
+                            orange: '#ff6748',
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow-pulse': 'glowPulse 3s infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glowPulse: {
+                            '0%': { opacity: 0.5, transform: 'scale(1)' },
+                            '100%': { opacity: 1, transform: 'scale(1.1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #292929;
+            color: #ffffff;
+            overflow-x: hidden;
+            /* Linear-style subtle grid background */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        ::selection {
+            background-color: #8c52ff;
+            color: #ffffff;
+        }
+
+        /* Glassmorphism Utilities - Dark Premium */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* 3D Tilt Card Base */
+        .tilt-card {
+            transition: transform 0.1s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+            position: relative;
+        }
+
+        .tilt-card-content {
+            transform: translateZ(30px); /* Pushes content forward for 3D effect */
+        }
+
+        /* Animated Glowing Borders */
+        .glow-border {
+            position: relative;
+        }
+        
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: linear-gradient(45deg, #8c52ff, #c1ff72, #ff6748);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            filter: blur(8px);
+        }
+
+        .glow-border:hover::before {
+            opacity: 0.7;
+        }
+
+        /* Gradient Text */
+        .text-gradient-purple {
+            background: linear-gradient(to right, #8c52ff, #c1ff72);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-gradient-orange {
+            background: linear-gradient(to right, #ff6748, #8c52ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Interactive Buttons */
+        .btn-interactive {
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .btn-interactive::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(193,255,114,0.4) 0%, transparent 60%);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .btn-interactive:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .btn-interactive span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: #8c52ff;
+            color: white;
+            box-shadow: 0 0 20px rgba(140, 82, 255, 0.3);
+            border: 1px solid #a074ff;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(140, 82, 255, 0.6);
+            background: #7a42e5;
+        }
+
+        /* Animated Connections (Hero) */
+        .connection-line {
+            stroke-dasharray: 100;
+            animation: dash 4s linear infinite;
+        }
+
+        @keyframes dash {
+            to { stroke-dashoffset: -200; }
+        }
+
+        /* Reveal Animation on Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        /* Accordion Smooth Height */
+        .accordion-content {
+            transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+            opacity: 1;
+        }
+        
+        .accordion-icon {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Ambient Mouse Tracker */
+        #mouse-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(600px circle at 50% 50%, rgba(140, 82, 255, 0.08), transparent 40%);
+            transition: background 0.1s ease;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-lime selection:text-brand-bg">
+
+    <!-- Ambient Mouse Glow -->
+    <div id="mouse-glow"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="border-b border-white/5 transition-all duration-300" id="nav-inner">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0 flex items-center cursor-pointer group" onclick="window.scrollTo(0,0)">
+                        <div class="relative w-10 h-10 mr-3 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                            <!-- Glow effect behind logo -->
+                            <div class="absolute inset-0 bg-brand-purple rounded-full blur-md opacity-40 group-hover:opacity-70 transition-opacity"></div>
+                            <img src="https://raw.githubusercontent.com/kaushalborse38-maker/Automind-Labs-Web/main/4.png" alt="Automind Labs Logo" class="relative z-10 w-full h-full object-contain">
+                        </div>
+                        <span class="font-bold text-2xl tracking-tight text-white group-hover:text-brand-lime transition-colors">Automind Labs</span>
+                    </div>
+
+                    <!-- Desktop Menu -->
+                    <div class="hidden md:flex items-center space-x-8 relative z-10">
+                        <a href="#services" class="text-gray-300 hover:text-brand-lime font-medium transition-colors">Services</a>
+                        <a href="#portfolio" class="text-gray-300 hover:text-brand-purple font-medium transition-colors">Portfolio</a>
+                        <a href="#about" class="text-gray-300 hover:text-brand-orange font-medium transition-colors">About</a>
+                        <a href="#contact" class="btn-primary px-6 py-2.5 rounded-full font-semibold transition-all">Book Consultation</a>
+                    </div>
+
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden flex items-center relative z-10">
+                        <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none p-2">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/10 absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#services" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-brand-lime hover:bg-white/5">Services</a>
+                <a href="#portfolio" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-brand-purple hover:bg-white/5">Portfolio</a>
+                <a href="#about" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-brand-orange hover:bg-white/5">About</a>
+                <a href="#contact" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium btn-primary">Book Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-screen flex items-center">
+        <!-- Abstract Background Blobs -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-purple rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-lime rounded-full mix-blend-screen filter blur-[120px] opacity-10 animate-float"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                
+                <!-- Hero Content -->
+                <div class="text-center lg:text-left reveal active">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full border border-brand-purple/30 bg-brand-purple/10 text-brand-purple font-medium text-sm mb-6 shadow-[0_0_15px_rgba(140,82,255,0.2)] backdrop-blur-sm">
+                        <span class="flex w-2 h-2 rounded-full bg-brand-lime mr-2 animate-pulse"></span>
+                        Automate Smarter. Grow Faster.
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
+                        Automate Your <br>
+                        <span class="text-gradient-purple">Business with AI</span>
+                    </h1>
+                    <p class="mt-4 text-xl text-gray-400 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed">
+                        We build AI Agents, Workflow Automations, and Intelligent Systems that save hundreds of hours every month. Stop doing manual work.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#contact" class="btn-primary px-8 py-4 rounded-2xl font-semibold text-lg flex items-center justify-center group">
+                            Book Free Consultation
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                        <a href="#portfolio" class="btn-interactive px-8 py-4 rounded-2xl font-semibold text-lg text-white flex items-center justify-center">
+                            <span>See Our Work</span>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm font-medium text-gray-400">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-brand-lime mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            No Code Needed
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-brand-purple mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Custom Solutions
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-brand-orange mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Seamless Integration
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Illustration (Interactive Nodes) -->
+                <div class="relative lg:h-[600px] flex items-center justify-center reveal active delay-200 tilt-card">
+                    <div class="tilt-card-content relative w-full max-w-lg aspect-square">
+                        
+                        <!-- SVG Connections -->
+                        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
+                            <!-- Center to Nodes -->
+                            <path d="M200 200 L100 100" stroke="url(#gradHero)" stroke-width="2" fill="none" class="connection-line" />
+                            <path d="M200 200 L300 100" stroke="url(#gradHero)" stroke-width="2" fill="none" class="connection-line" style="animation-delay: 0.5s" />
+                            <path d="M200 200 L340 200" stroke="url(#gradHero)" stroke-width="2" fill="none" class="connection-line" style="animation-delay: 1s" />
+                            <path d="M200 200 L300 300" stroke="url(#gradHero)" stroke-width="2" fill="none" class="connection-line" style="animation-delay: 1.5s" />
+                            <path d="M200 200 L100 300" stroke="url(#gradHero)" stroke-width="2" fill="none" class="connection-line" style="animation-delay: 2s" />
+                            <path d="M200 200 L60 200" stroke="url(#gradHero)" stroke-width="2" fill="none" class="connection-line" style="animation-delay: 2.5s" />
+                            
+                            <defs>
+                                <linearGradient id="gradHero" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#8c52ff;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#c1ff72;stop-opacity:0.8" />
+                                    <stop offset="100%" style="stop-color:#ff6748;stop-opacity:0.2" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+
+                        <!-- Central AI Core -->
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 glass-panel glow-border rounded-3xl flex items-center justify-center z-20 shadow-[0_0_40px_rgba(140,82,255,0.4)] animate-float">
+                            <div class="relative flex items-center justify-center w-full h-full">
+                                <img src="https://raw.githubusercontent.com/kaushalborse38-maker/Automind-Labs-Web/main/4.png" alt="AI Brain Core" class="w-16 h-16 object-contain filter drop-shadow-[0_0_10px_rgba(193,255,114,0.5)]">
+                                <div class="absolute -bottom-8 px-3 py-1 bg-white/10 border border-white/20 backdrop-blur-md rounded-full text-xs font-bold text-white tracking-widest uppercase shadow-lg">AI Core</div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Nodes -->
+                        <div class="absolute top-[10%] left-[10%] transform -translate-x-1/2 -translate-y-1/2 w-14 h-14 glass-panel border-brand-purple/50 rounded-2xl flex items-center justify-center z-10 animate-float shadow-[0_0_15px_rgba(140,82,255,0.2)]" style="animation-delay: 0.2s">
+                            <span class="text-xl font-bold text-brand-purple">API</span>
+                        </div>
+                        <div class="absolute top-[10%] right-[10%] transform translate-x-1/2 -translate-y-1/2 w-14 h-14 glass-panel border-brand-lime/50 rounded-2xl flex items-center justify-center z-10 animate-float shadow-[0_0_15px_rgba(193,255,114,0.2)]" style="animation-delay: 0.7s">
+                            <span class="text-xl text-brand-lime">CRM</span>
+                        </div>
+                        <div class="absolute top-1/2 right-[-5%] transform translate-x-1/2 -translate-y-1/2 w-14 h-14 glass-panel border-white/20 rounded-2xl flex items-center justify-center z-10 animate-float" style="animation-delay: 1.2s">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div class="absolute bottom-[10%] right-[10%] transform translate-x-1/2 translate-y-1/2 w-14 h-14 glass-panel border-[#25D366]/50 rounded-2xl flex items-center justify-center z-10 animate-float" style="animation-delay: 1.7s">
+                            <svg class="w-7 h-7 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        </div>
+                        <div class="absolute bottom-[10%] left-[10%] transform -translate-x-1/2 translate-y-1/2 w-14 h-14 glass-panel border-brand-orange/50 rounded-2xl flex items-center justify-center z-10 animate-float" style="animation-delay: 2.2s">
+                            <span class="text-xl text-brand-orange">N8N</span>
+                        </div>
+                        <div class="absolute top-1/2 left-[-5%] transform -translate-x-1/2 -translate-y-1/2 w-14 h-14 glass-panel border-[#007a5a]/50 rounded-2xl flex items-center justify-center z-10 animate-float" style="animation-delay: 2.7s">
+                             <svg class="w-6 h-6 text-[#007a5a]" fill="currentColor" viewBox="0 0 24 24"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.523-2.522v-2.522h2.523zM15.165 17.688a2.527 2.527 0 0 1-2.523-2.523 2.526 2.526 0 0 1 2.523-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 border-y border-white/5 bg-black/20 relative z-20 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                <div class="reveal tilt-card p-4">
+                    <div class="tilt-card-content">
+                        <div class="text-4xl font-extrabold text-white mb-2 tracking-tight">100+</div>
+                        <div class="text-sm font-medium text-brand-lime uppercase tracking-wider">Hours Saved Monthly</div>
+                    </div>
+                </div>
+                <div class="reveal delay-100 tilt-card p-4">
+                    <div class="tilt-card-content">
+                        <div class="text-4xl font-extrabold text-white mb-2 tracking-tight">80%</div>
+                        <div class="text-sm font-medium text-brand-purple uppercase tracking-wider">Faster Operations</div>
+                    </div>
+                </div>
+                <div class="reveal delay-200 tilt-card p-4">
+                    <div class="tilt-card-content">
+                        <div class="text-4xl font-extrabold text-white mb-2 tracking-tight">24/7</div>
+                        <div class="text-sm font-medium text-brand-orange uppercase tracking-wider">AI Assistants</div>
+                    </div>
+                </div>
+                <div class="reveal delay-300 tilt-card p-4">
+                    <div class="tilt-card-content">
+                        <div class="text-4xl font-extrabold text-white mb-2 tracking-tight">99%</div>
+                        <div class="text-sm font-medium text-brand-lime uppercase tracking-wider">Automation Accuracy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-brand-purple font-semibold tracking-widest uppercase text-sm mb-3">Our Expertise</h2>
+                <h3 class="text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">Automations that <span class="text-gradient-purple">drive growth.</span></h3>
+                <p class="text-lg text-gray-400">We build premium, tailored solutions that integrate seamlessly with your existing tech stack.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Service 1 -->
+                <div class="glass-panel glow-border p-8 rounded-2xl tilt-card reveal cursor-pointer group">
+                    <div class="tilt-card-content">
+                        <div class="w-12 h-12 rounded-xl bg-brand-purple/20 border border-brand-purple/30 flex items-center justify-center mb-6 text-brand-purple group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3 tracking-tight">AI Agents</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Custom GPT-powered AI assistants trained on your specific business data to handle complex tasks instantly.</p>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-panel glow-border p-8 rounded-2xl tilt-card reveal delay-100 cursor-pointer group">
+                    <div class="tilt-card-content">
+                        <div class="w-12 h-12 rounded-xl bg-brand-orange/20 border border-brand-orange/30 flex items-center justify-center mb-6 text-brand-orange group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3 tracking-tight">Workflow Automation</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Automate repetitive tasks across multiple apps using platforms like n8n, Make.com, and custom API integrations.</p>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-panel glow-border p-8 rounded-2xl tilt-card reveal delay-200 cursor-pointer group">
+                    <div class="tilt-card-content">
+                        <div class="w-12 h-12 rounded-xl bg-brand-lime/20 border border-brand-lime/30 flex items-center justify-center mb-6 text-brand-lime group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3 tracking-tight">CRM Automation</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Streamline lead capture, automated follow-ups, and customer management within HubSpot, Salesforce, etc.</p>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-panel glow-border p-8 rounded-2xl tilt-card reveal cursor-pointer group">
+                    <div class="tilt-card-content">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center mb-6 text-blue-400 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3 tracking-tight">AI Chatbots</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Intelligent conversational agents deployed on your Website, WhatsApp, and Telegram for 24/7 support.</p>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="glass-panel glow-border p-8 rounded-2xl tilt-card reveal delay-100 cursor-pointer group">
+                    <div class="tilt-card-content">
+                        <div class="w-12 h-12 rounded-xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center mb-6 text-pink-400 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3 tracking-tight">Social Media Automation</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Pipelines that automatically research, generate, format, and publish high-quality AI content.</p>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="glass-panel glow-border p-8 rounded-2xl tilt-card reveal delay-200 cursor-pointer group">
+                    <div class="tilt-card-content">
+                        <div class="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3 tracking-tight">Custom AI Solutions</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Tailored software utilizing advanced LLMs (OpenAI, Anthropic) to solve unique, complex business workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-24 relative overflow-hidden bg-black/40 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-brand-lime font-semibold tracking-widest uppercase text-sm mb-3">Our Process</h2>
+                <h3 class="text-4xl font-bold text-white">How It Works</h3>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center relative">
+                <!-- Connecting Line Desktop -->
+                <div class="hidden md:block absolute top-1/2 left-[10%] w-[80%] h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-y-1/2 z-0"></div>
+
+                <!-- Step 1 -->
+                <div class="flex flex-col items-center relative z-10 w-full md:w-1/4 mb-12 md:mb-0 reveal group cursor-pointer">
+                    <div class="w-16 h-16 rounded-full bg-brand-bg border border-white/20 flex items-center justify-center text-xl font-bold text-white mb-6 group-hover:border-brand-purple group-hover:shadow-[0_0_20px_rgba(140,82,255,0.4)] transition-all">1</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">Free Consultation</h4>
+                    <p class="text-gray-400 text-center text-sm px-4">Audit workflows & find opportunities.</p>
+                    <div class="md:hidden mt-6 text-white/20">↓</div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex flex-col items-center relative z-10 w-full md:w-1/4 mb-12 md:mb-0 reveal delay-100 group cursor-pointer">
+                    <div class="w-16 h-16 rounded-full bg-brand-bg border border-white/20 flex items-center justify-center text-xl font-bold text-white mb-6 group-hover:border-brand-orange group-hover:shadow-[0_0_20px_rgba(255,103,72,0.4)] transition-all">2</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">Strategy</h4>
+                    <p class="text-gray-400 text-center text-sm px-4">Design custom architecture map.</p>
+                    <div class="md:hidden mt-6 text-white/20">↓</div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center relative z-10 w-full md:w-1/4 mb-12 md:mb-0 reveal delay-200 group cursor-pointer">
+                    <div class="w-16 h-16 rounded-full bg-brand-bg border border-white/20 flex items-center justify-center text-xl font-bold text-white mb-6 group-hover:border-brand-lime group-hover:shadow-[0_0_20px_rgba(193,255,114,0.4)] transition-all">3</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">Build</h4>
+                    <p class="text-gray-400 text-center text-sm px-4">Develop, integrate, and test.</p>
+                    <div class="md:hidden mt-6 text-white/20">↓</div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flex flex-col items-center relative z-10 w-full md:w-1/4 reveal delay-300 group cursor-pointer">
+                    <div class="w-16 h-16 rounded-full bg-brand-bg border border-brand-lime flex items-center justify-center text-xl font-bold text-brand-lime mb-6 shadow-[0_0_20px_rgba(193,255,114,0.2)] group-hover:bg-brand-lime group-hover:text-brand-bg transition-all">4</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">Launch & Support</h4>
+                    <p class="text-gray-400 text-center text-sm px-4">Deployment and ongoing maintenance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Automations / Industries -->
+    <section class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-white mb-4">Industries We Serve</h2>
+            </div>
+            
+            <!-- Industries Tags -->
+            <div class="flex flex-wrap justify-center gap-3 mb-24 reveal">
+                <span class="px-5 py-2 glass-panel rounded-full text-sm font-medium text-gray-300 hover:text-white hover:border-brand-lime hover:bg-white/10 cursor-pointer transition-all">Healthcare</span>
+                <span class="px-5 py-2 glass-panel rounded-full text-sm font-medium text-gray-300 hover:text-white hover:border-brand-lime hover:bg-white/10 cursor-pointer transition-all">Real Estate</span>
+                <span class="px-5 py-2 glass-panel rounded-full text-sm font-medium text-gray-300 hover:text-white hover:border-brand-lime hover:bg-white/10 cursor-pointer transition-all">Finance</span>
+                <span class="px-5 py-2 glass-panel rounded-full text-sm font-medium text-gray-300 hover:text-white hover:border-brand-lime hover:bg-white/10 cursor-pointer transition-all">Education</span>
+                <span class="px-5 py-2 glass-panel rounded-full text-sm font-medium text-gray-300 hover:text-white hover:border-brand-lime hover:bg-white/10 cursor-pointer transition-all">E-commerce</span>
+                <span class="px-5 py-2 glass-panel rounded-full text-sm font-medium text-gray-300 hover:text-white hover:border-brand-lime hover:bg-white/10 cursor-pointer transition-all">Marketing</span>
+                <span class="px-5 py-2 glass-panel rounded-full text-sm font-medium text-gray-300 hover:text-white hover:border-brand-lime hover:bg-white/10 cursor-pointer transition-all">Restaurants</span>
+                <span class="px-5 py-2 glass-panel rounded-full text-sm font-medium text-gray-300 hover:text-white hover:border-brand-lime hover:bg-white/10 cursor-pointer transition-all">Consulting</span>
+            </div>
+
+            <div class="text-center mb-12 reveal">
+                <h3 class="text-3xl font-bold text-white">Featured Use Cases</h3>
+            </div>
+
+            <!-- Use Cases Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass-panel p-6 rounded-2xl reveal tilt-card hover:bg-white/5 transition-colors">
+                    <div class="tilt-card-content">
+                        <div class="text-brand-lime mb-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg></div>
+                        <h5 class="font-bold text-white mb-2">WhatsApp Support</h5>
+                        <p class="text-sm text-gray-400">Auto-resolve 80% of customer queries instantly.</p>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl reveal delay-100 tilt-card hover:bg-white/5 transition-colors">
+                    <div class="tilt-card-content">
+                        <div class="text-brand-orange mb-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                        <h5 class="font-bold text-white mb-2">Invoice Automation</h5>
+                        <p class="text-sm text-gray-400">Extract data from PDFs and sync to accounting software.</p>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl reveal delay-200 tilt-card hover:bg-white/5 transition-colors">
+                    <div class="tilt-card-content">
+                        <div class="text-brand-purple mb-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></div>
+                        <h5 class="font-bold text-white mb-2">Lead Qualification</h5>
+                        <p class="text-sm text-gray-400">AI scores and routes leads directly to sales.</p>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl reveal delay-300 tilt-card hover:bg-white/5 transition-colors">
+                    <div class="tilt-card-content">
+                        <div class="text-white mb-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
+                        <h5 class="font-bold text-white mb-2">Appointment Booking</h5>
+                        <p class="text-sm text-gray-400">Conversational AI checks calendars and books meetings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 relative z-10 bg-black/20 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-brand-orange font-semibold tracking-widest uppercase text-sm mb-3">Our Work</h2>
+                <h3 class="text-4xl font-bold text-white mb-6">Recent Projects</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Project 1 -->
+                <div class="group glass-panel glow-border rounded-3xl overflow-hidden reveal tilt-card cursor-pointer">
+                    <div class="tilt-card-content p-2">
+                        <div class="h-64 overflow-hidden relative rounded-2xl border border-white/10">
+                            <!-- Premium Placeholder replacing actual image to keep standalone -->
+                            <div class="w-full h-full bg-gradient-to-br from-[#1a1a1a] to-[#292929] flex items-center justify-center relative">
+                                <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-20"></div>
+                                <span class="text-2xl font-bold text-white/20 tracking-widest uppercase">E-commerce AI</span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex gap-2 mb-4">
+                                <span class="text-[10px] font-bold px-2 py-1 bg-white/5 border border-white/10 text-brand-lime rounded-full uppercase tracking-wide">Make.com</span>
+                                <span class="text-[10px] font-bold px-2 py-1 bg-white/5 border border-white/10 text-white rounded-full uppercase tracking-wide">Shopify</span>
+                                <span class="text-[10px] font-bold px-2 py-1 bg-white/5 border border-white/10 text-brand-purple rounded-full uppercase tracking-wide">OpenAI</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-white mb-3">E-commerce Fulfillment AI</h4>
+                            <p class="text-gray-400 mb-6 text-sm leading-relaxed">Automated the entire order processing, inventory sync, and personalized customer tracking email system, saving 40 hours weekly.</p>
+                            <a href="#" class="text-brand-lime font-semibold text-sm flex items-center group-hover:text-white transition-colors">
+                                View Project <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group glass-panel glow-border rounded-3xl overflow-hidden reveal delay-100 tilt-card cursor-pointer">
+                    <div class="tilt-card-content p-2">
+                        <div class="h-64 overflow-hidden relative rounded-2xl border border-white/10">
+                             <div class="w-full h-full bg-gradient-to-bl from-[#1a1a1a] to-[#292929] flex items-center justify-center relative">
+                                <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-20"></div>
+                                <span class="text-2xl font-bold text-white/20 tracking-widest uppercase">Real Estate Bot</span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex gap-2 mb-4">
+                                <span class="text-[10px] font-bold px-2 py-1 bg-white/5 border border-white/10 text-brand-orange rounded-full uppercase tracking-wide">n8n</span>
+                                <span class="text-[10px] font-bold px-2 py-1 bg-white/5 border border-white/10 text-white rounded-full uppercase tracking-wide">Twilio</span>
+                                <span class="text-[10px] font-bold px-2 py-1 bg-white/5 border border-white/10 text-brand-lime rounded-full uppercase tracking-wide">GoHighLevel</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-white mb-3">Real Estate Lead Routing</h4>
+                            <p class="text-gray-400 mb-6 text-sm leading-relaxed">Built an AI conversational SMS agent that pre-qualifies incoming Zillow leads 24/7 and automatically books showings.</p>
+                            <a href="#" class="text-brand-orange font-semibold text-sm flex items-center group-hover:text-white transition-colors">
+                                View Project <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 relative z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl font-bold text-white mb-4">Client Success Stories</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Testimonial 1 -->
+                <div class="glass-panel p-8 rounded-2xl reveal hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-brand-lime text-lg mb-4 tracking-widest">★★★★★</div>
+                    <p class="text-gray-300 italic mb-8 text-sm leading-relaxed">"Automind Labs completely transformed our support desk. The AI agent they built handles 70% of our tier 1 tickets automatically. It saved us over 20 hours every week."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-brand-purple/20 border border-brand-purple/50 mr-3 flex items-center justify-center font-bold text-brand-purple text-xs">SM</div>
+                        <div>
+                            <h5 class="font-bold text-white text-sm">Sarah Mitchell</h5>
+                            <p class="text-xs text-gray-500 uppercase tracking-wide">COO, NovaTech</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-panel p-8 rounded-2xl reveal delay-100 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-brand-lime text-lg mb-4 tracking-widest">★★★★★</div>
+                    <p class="text-gray-300 italic mb-8 text-sm leading-relaxed">"The workflow automation they set up between our CRM, billing, and project management tools eliminated data entry errors entirely. Pure magic."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-brand-orange/20 border border-brand-orange/50 mr-3 flex items-center justify-center font-bold text-brand-orange text-xs">DR</div>
+                        <div>
+                            <h5 class="font-bold text-white text-sm">David Rodriguez</h5>
+                            <p class="text-xs text-gray-500 uppercase tracking-wide">Founder, ScaleMedia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-panel p-8 rounded-2xl reveal delay-200 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-brand-lime text-lg mb-4 tracking-widest">★★★★★</div>
+                    <p class="text-gray-300 italic mb-8 text-sm leading-relaxed">"We were skeptical about AI, but Automind mapped out a strategy that made sense. The implementation was fast, and the ROI was visible within the first month."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-brand-lime/20 border border-brand-lime/50 mr-3 flex items-center justify-center font-bold text-brand-lime text-xs">EK</div>
+                        <div>
+                            <h5 class="font-bold text-white text-sm">Elena K.</h5>
+                            <p class="text-xs text-gray-500 uppercase tracking-wide">Director, Apex Real Estate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="about" class="py-24 relative z-10 bg-black/20 border-t border-white/5">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-3">
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item glass-panel rounded-xl overflow-hidden reveal">
+                    <button class="w-full px-6 py-5 text-left font-medium text-white flex justify-between items-center focus:outline-none hover:bg-white/5 transition-colors" onclick="toggleAccordion(this)">
+                        <span>How long does it take to build an automation?</span>
+                        <svg class="accordion-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content px-6 bg-black/20">
+                        <p class="pb-5 text-gray-400 text-sm leading-relaxed">Simple workflow automations can be deployed in 3-5 days. Complex AI agents and custom integrations typically take 2-4 weeks from strategy to full deployment, depending on the complexity of your systems.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item glass-panel rounded-xl overflow-hidden reveal delay-100">
+                    <button class="w-full px-6 py-5 text-left font-medium text-white flex justify-between items-center focus:outline-none hover:bg-white/5 transition-colors" onclick="toggleAccordion(this)">
+                        <span>How much does automation cost?</span>
+                        <svg class="accordion-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content px-6 bg-black/20">
+                        <p class="pb-5 text-gray-400 text-sm leading-relaxed">Pricing depends on the scope. We offer project-based pricing for specific builds, as well as monthly retainers for ongoing optimization and support. Book a free consultation for a tailored quote.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item glass-panel rounded-xl overflow-hidden reveal delay-200">
+                    <button class="w-full px-6 py-5 text-left font-medium text-white flex justify-between items-center focus:outline-none hover:bg-white/5 transition-colors" onclick="toggleAccordion(this)">
+                        <span>Do you provide support after launch?</span>
+                        <svg class="accordion-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content px-6 bg-black/20">
+                        <p class="pb-5 text-gray-400 text-sm leading-relaxed">Absolutely. APIs change and software updates happen. We offer comprehensive maintenance and support packages to ensure your automations keep running flawlessly 24/7.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="accordion-item glass-panel rounded-xl overflow-hidden reveal delay-300">
+                    <button class="w-full px-6 py-5 text-left font-medium text-white flex justify-between items-center focus:outline-none hover:bg-white/5 transition-colors" onclick="toggleAccordion(this)">
+                        <span>Can AI integrate with our existing software?</span>
+                        <svg class="accordion-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content px-6 bg-black/20">
+                        <p class="pb-5 text-gray-400 text-sm leading-relaxed">Yes. If your software has an API, webhooks, or database access, we can integrate with it. We commonly work with tools like Salesforce, HubSpot, Slack, Google Workspace, Stripe, and Shopify.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="py-24 relative overflow-hidden z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="glass-panel glow-border rounded-3xl p-12 lg:p-20 text-center relative overflow-hidden reveal tilt-card">
+                <div class="tilt-card-content relative z-10">
+                    <h2 class="text-4xl lg:text-5xl font-extrabold text-white mb-6 tracking-tight">Ready to Automate Your Business?</h2>
+                    <p class="text-lg text-gray-400 mb-10 max-w-xl mx-auto">Stop wasting time on manual tasks. Book a free strategy session today and discover how AI can transform your operations.</p>
+                    
+                    <button class="btn-primary px-10 py-4 rounded-full font-bold text-lg inline-flex items-center group">
+                        Let's Build Together
+                        <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </button>
+                    <p class="mt-4 text-xs text-gray-500 uppercase tracking-widest">No commitment required.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/50 pt-16 pb-8 border-t border-white/10 relative z-10 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center mb-4 group cursor-pointer" onclick="window.scrollTo(0,0)">
+                        <div class="relative w-8 h-8 mr-2 transition-transform duration-300 group-hover:scale-110">
+                            <img src="https://raw.githubusercontent.com/kaushalborse38-maker/Automind-Labs-Web/main/4.png" alt="Automind Labs Logo" class="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(140,82,255,0.5)]">
+                        </div>
+                        <span class="font-bold text-xl tracking-tight text-white group-hover:text-brand-purple transition-colors">Automind Labs</span>
+                    </div>
+                    <p class="text-gray-400 max-w-sm mb-6 text-sm leading-relaxed">Automate Smarter. Grow Faster. We build premium, intelligent systems that save time and increase revenue.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4 tracking-wide">Navigation</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-sm text-gray-400 hover:text-brand-lime transition-colors">Services</a></li>
+                        <li><a href="#portfolio" class="text-sm text-gray-400 hover:text-brand-purple transition-colors">Portfolio</a></li>
+                        <li><a href="#about" class="text-sm text-gray-400 hover:text-brand-orange transition-colors">About</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4 tracking-wide">Contact</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="mailto:official@automindlabs.cloud" class="text-sm text-gray-400 hover:text-white transition-colors flex items-center break-all group">
+                                <svg class="w-4 h-4 mr-2 flex-shrink-0 text-brand-purple group-hover:text-brand-lime transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                official@automindlabs.cloud
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-xs tracking-wider uppercase">© 2026 Automind Labs. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Navbar blur & border on scroll
+        const navbarInner = document.getElementById('nav-inner');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbarInner.classList.add('glass-panel');
+                navbarInner.classList.remove('border-white/5');
+            } else {
+                navbarInner.classList.remove('glass-panel');
+                navbarInner.classList.add('border-white/5');
+            }
+        });
+
+        // FAQ Accordion Logic
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const content = item.querySelector('.accordion-content');
+            const isActive = item.classList.contains('active');
+
+            document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.accordion-content').style.paddingTop = '0';
+                    otherItem.querySelector('.accordion-content').style.paddingBottom = '0';
+                }
+            });
+
+            if (!isActive) {
+                item.classList.add('active');
+                content.style.paddingTop = '0.75rem'; 
+            } else {
+                item.classList.remove('active');
+                content.style.paddingTop = '0';
+            }
+        }
+
+        // Advanced Intersection Observer for Scroll Reveals
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Ambient Mouse Glow Tracker
+        const mouseGlow = document.getElementById('mouse-glow');
+        window.addEventListener('mousemove', (e) => {
+            requestAnimationFrame(() => {
+                mouseGlow.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(140, 82, 255, 0.05), transparent 40%)`;
+            });
+        });
+
+        // 3D Tilt Effect for Cards (Framer/Linear Style)
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; // x position within the element.
+                const y = e.clientY - rect.top;  // y position within the element.
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Calculate rotation (max 10 degrees)
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+        // Trigger reveal for items already in viewport on load
+        setTimeout(() => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if(rect.top < window.innerHeight) {
+                    el.classList.add('active');
+                }
+            });
+        }, 100);
+
+    </script>
+</body>
+</html>
